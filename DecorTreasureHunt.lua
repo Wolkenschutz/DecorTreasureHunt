@@ -1,14 +1,18 @@
 local ADDON_NAME, DTH = ...;
 
+local L = DTH.L;
+
 local QUEST_NPC_ALLIANCE = 248854;
+local MAP_ALLIANCE = 2352;
 local QUEST_NPC_HORDE = 253596;
+local MAP_HORDE = 2351;
 
 local addonTitle = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title");
 local tomtomWaypointUid;
 
 local function SetWaypoint(x, y)
     local mapId = C_Map.GetBestMapForUnit("player");
-    if (not mapId) then
+    if (not mapId or (mapId ~= MAP_HORDE and mapId ~= MAP_ALLIANCE) ) then
         return;
     end
 
@@ -18,6 +22,8 @@ local function SetWaypoint(x, y)
     if (TomTom and TomTom.AddWaypoint) then
         tomtomWaypointUid = TomTom:AddWaypoint(mapId, x, y, { title = addonTitle });
     end
+
+    print("|cffe6c619" .. addonTitle .. ":|r " .. L.WAYPOINT_SET);
 end
 
 local function ClearWaypoint()
@@ -49,12 +55,14 @@ local function OnEvent(self, event, questId)
 
         self:UnregisterEvent(event);
         GetQuestReward(1);
+        print("|cffe6c619" .. addonTitle .. ":|r " .. L.QUEST_TURNIN);
 
         return;
     end
 
     if (event == "QUEST_DETAIL") then
         AcceptQuest();
+        print("|cffe6c619" .. addonTitle .. ":|r " .. L.QUEST_ACCEPTED);
 
         return;
     end
