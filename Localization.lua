@@ -31,6 +31,22 @@ local L = {
         QUEST_ACCEPTED = "Quest automatisch angenommen.",
         QUEST_TURNIN = "Quest automatisch abgegeben.",
         WAYPOINT_SET = "Wegpunkt zum Schatzfundort gesetzt.",
+    },
+
+    esES = {
+        -- Opciones
+        AUTO_ACCEPT = "Aceptar misión automáticamente",
+        AUTO_TURNIN = "Entregar misión automáticamente",
+        TOOLTIP_TEXT = "Haz clic para configurar la aceptación y entrega automática de misiones",
+        AUTO_ACCEPT_ENABLED = "La aceptación automática ha sido |cnGREEN_FONT_COLOR:activada|r.",
+        AUTO_ACCEPT_DISABLED = "La aceptación automática ha sido |cnRED_FONT_COLOR:desactivada|r.",
+        AUTO_TURNIN_ENABLED = "La entrega automática ha sido |cnGREEN_FONT_COLOR:activada|r.",
+        AUTO_TURNIN_DISABLED = "La entrega automática ha sido |cnRED_FONT_COLOR:desactivada|r.",
+
+        -- Addon principal
+        QUEST_ACCEPTED = "Misión aceptada automáticamente.",
+        QUEST_TURNIN = "Misión entregada automáticamente.",
+        WAYPOINT_SET = "Punto de ruta establecido en la ubicación del tesoro.",
     }
 };
 
