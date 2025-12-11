@@ -47,7 +47,24 @@ local L = {
         QUEST_ACCEPTED = "Misión aceptada automáticamente.",
         QUEST_TURNIN = "Misión entregada automáticamente.",
         WAYPOINT_SET = "Punto de ruta establecido en la ubicación del tesoro.",
-    }
+        WAYPOINT_SET = "Wegpunkt zum Schatzfundort gesetzt.",       
+    },
+	
+    zhCN = {
+          -- Options
+          AUTO_ACCEPT = "自动接受任务",
+          AUTO_TURNIN = "自动完成任务",
+          TOOLTIP_TEXT = "点击设置自动接受与自动完成任务",
+          AUTO_ACCEPT_ENABLED = "自动接受任务已 |cnGREEN_FONT_COLOR：启用|r。",
+          AUTO_ACCEPT_DISABLED = "自动接受任务已 |cnRED_FONT_COLOR：禁用|r。",
+          AUTO_TURNIN_ENABLED = "自动完成任务已 |cnGREEN_FONT_COLOR：启用|r。",
+          AUTO_TURNIN_DISABLED = "自动完成任务已 |cnRED_FONT_COLOR：禁用|r。",
+
+          -- Main Addon
+          QUEST_ACCEPTED = "已自动接受任务。",
+          QUEST_TURNIN = "已自动完成任务。",
+          WAYPOINT_SET = "已设置通往宝藏位置的路径点。",
+      }
 };
 
 DTH.L = L[GetLocale()] or L["enUS"];

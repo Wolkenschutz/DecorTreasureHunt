@@ -49,7 +49,7 @@ local function OnEvent(self, event, questId)
     end
 
     if (event == "QUEST_COMPLETE") then
-        if (IsShiftKeyDown() or not DecorTreasureHuntDB.autoTurnIn) then
+        if (not DTH.QuestData[GetQuestID()] or IsShiftKeyDown() or not DecorTreasureHuntDB.autoTurnIn) then
             return;
         end
 
