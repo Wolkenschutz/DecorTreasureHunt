@@ -10,9 +10,28 @@ local MAP_HORDE = 2351;
 local addonTitle = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title");
 local tomtomWaypointUid;
 
+local function GetQuestList()
+    local mapId = C_Map.GetBestMapForUnit("player");
+    return DTH.QuestData[mapId];
+end
+
+local function GetCompletedCount()
+    local completed, total = 0, 0;
+    local questList = GetQuestList();
+
+    for questId in pairs(questList or {}) do
+        total = total + 1;
+        if (C_QuestLog.IsQuestFlaggedCompleted(questId)) then
+            completed = completed + 1;
+        end
+    end
+
+    return completed, total;
+end
+
 local function SetWaypoint(x, y)
     local mapId = C_Map.GetBestMapForUnit("player");
-    if (not mapId or (mapId ~= MAP_HORDE and mapId ~= MAP_ALLIANCE) ) then
+    if (not mapId or (mapId ~= MAP_HORDE and mapId ~= MAP_ALLIANCE)) then
         return;
     end
 
@@ -32,6 +51,9 @@ local function ClearWaypoint()
     if (TomTom and TomTom.RemoveWaypoint) then
         TomTom:RemoveWaypoint(tomtomWaypointUid);
     end
+
+    local completed, total = GetCompletedCount();
+    print("|cffe6c619" .. addonTitle .. ":|r " .. string.format(L.QUEST_PROGRESS, completed, total));
 end
 
 local function OnEvent(self, event, questId)
@@ -49,7 +71,9 @@ local function OnEvent(self, event, questId)
     end
 
     if (event == "QUEST_COMPLETE") then
-        if (not DTH.QuestData[GetQuestID()] or IsShiftKeyDown() or not DecorTreasureHuntDB.autoTurnIn) then
+        local questList = GetQuestList();
+
+        if (not questList or not questList[GetQuestID()] or IsShiftKeyDown() or not DecorTreasureHuntDB.autoTurnIn) then
             return;
         end
 
@@ -80,11 +104,15 @@ local function OnEvent(self, event, questId)
 
         local npcId = tonumber((select(6, strsplit("-", guid))));
         if (npcId == QUEST_NPC_HORDE or npcId == QUEST_NPC_ALLIANCE) then
-            for _, info in ipairs(C_GossipInfo.GetAvailableQuests() or {}) do
-                if (DTH.QuestData[info.questID]) then
-                    self:RegisterEvent("QUEST_DETAIL");
-                    C_GossipInfo.SelectAvailableQuest(info.questID);
-                    break;
+            local questList = GetQuestList();
+
+            if (questList) then
+                for _, info in ipairs(C_GossipInfo.GetAvailableQuests() or {}) do
+                    if (questList[info.questID]) then
+                        self:RegisterEvent("QUEST_DETAIL");
+                        C_GossipInfo.SelectAvailableQuest(info.questID);
+                        break;
+                    end
                 end
             end
         end
@@ -92,18 +120,21 @@ local function OnEvent(self, event, questId)
         return;
     end
 
-    local data = DTH.QuestData[questId];
+    local questList = GetQuestList();
+    local data = questList and questList[questId];
 
     if (event == "PLAYER_ENTERING_WORLD") then
-        for i = 1, C_QuestLog.GetNumQuestLogEntries() do
-            local info = C_QuestLog.GetInfo(i);
-            if (info and not info.isHeader) then
-                data = DTH.QuestData[info.questID];
+        if (questList) then
+            for i = 1, C_QuestLog.GetNumQuestLogEntries() do
+                local info = C_QuestLog.GetInfo(i);
+                if (info and not info.isHeader) then
+                    data = questList[info.questID];
 
-                if (data) then
-                    questId = info.questID;
-                    event = "QUEST_ACCEPTED";
-                    break;
+                    if (data) then
+                        questId = info.questID;
+                        event = "QUEST_ACCEPTED";
+                        break;
+                    end
                 end
             end
         end
