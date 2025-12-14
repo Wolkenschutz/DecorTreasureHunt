@@ -14,7 +14,7 @@ local L = {
         -- Main Addon
         QUEST_ACCEPTED = "Quest automatically accepted.",
         QUEST_TURNIN = "Quest automatically turned in.",
-        QUEST_PROGRESS = "You have now completed %d of %d available quests.",
+        QUEST_PROGRESS = "You have now completed |cnNORMAL_FONT_COLOR:%d|r of |cnNORMAL_FONT_COLOR:%d|r quests on |cnNORMAL_FONT_COLOR:%s|r.",
         WAYPOINT_SET = "Waypoint set to treasure location.",
     },
 
@@ -31,7 +31,7 @@ local L = {
         -- Main Addon
         QUEST_ACCEPTED = "Quest automatisch angenommen.",
         QUEST_TURNIN = "Quest automatisch abgegeben.",
-        QUEST_PROGRESS = "Du hast nun %d von %d möglichen Quests abgeschlossen.",
+        QUEST_PROGRESS = "Du hast nun |cnNORMAL_FONT_COLOR:%d|r von |cnNORMAL_FONT_COLOR:%d|r Quests auf |cnNORMAL_FONT_COLOR:%s|r abgeschlossen.",
         WAYPOINT_SET = "Wegpunkt zum Schatzfundort gesetzt.",
     },
 
@@ -48,6 +48,7 @@ local L = {
         -- Addon principal
         QUEST_ACCEPTED = "Misión aceptada automáticamente.",
         QUEST_TURNIN = "Misión entregada automáticamente.",
+        QUEST_PROGRESS = "You have now completed |cnNORMAL_FONT_COLOR:%d|r of |cnNORMAL_FONT_COLOR:%d|r quests on |cnNORMAL_FONT_COLOR:%s|r.",
         WAYPOINT_SET = "Punto de ruta establecido en la ubicación del tesoro.",
     },
 
@@ -64,6 +65,7 @@ local L = {
         -- Main Addon
         QUEST_ACCEPTED = "已自动接受任务。",
         QUEST_TURNIN = "已自动完成任务。",
+        QUEST_PROGRESS = "You have now completed |cnNORMAL_FONT_COLOR:%d|r of |cnNORMAL_FONT_COLOR:%d|r quests on |cnNORMAL_FONT_COLOR:%s|r.",
         WAYPOINT_SET = "已设置通往宝藏位置的路径点。",
     }
 };

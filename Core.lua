@@ -53,7 +53,7 @@ local function ClearWaypoint()
     end
 
     local completed, total = GetCompletedCount();
-    print("|cffe6c619" .. addonTitle .. ":|r " .. string.format(L.QUEST_PROGRESS, completed, total));
+    print("|cffe6c619" .. addonTitle .. ":|r " .. string.format(L.QUEST_PROGRESS, completed, total, GetMinimapZoneText()));
 end
 
 local function OnEvent(self, event, questId)
