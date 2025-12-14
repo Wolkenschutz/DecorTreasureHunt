@@ -67,6 +67,23 @@ local L = {
         QUEST_TURNIN = "已自动完成任务。",
         QUEST_PROGRESS = "You have now completed |cnNORMAL_FONT_COLOR:%d|r of |cnNORMAL_FONT_COLOR:%d|r quests on |cnNORMAL_FONT_COLOR:%s|r.",
         WAYPOINT_SET = "已设置通往宝藏位置的路径点。",
+    },
+    ruRU = {
+        -- Options
+        -- Translation ZamestoTV
+        AUTO_ACCEPT = "Автопринятие заданий",
+        AUTO_TURNIN = "Автосдача заданий",
+        TOOLTIP_TEXT = "Кликните, чтобы настроить автопринятие и автосдачу заданий",
+        AUTO_ACCEPT_ENABLED = "Автопринятие заданий |cnGREEN_FONT_COLOR:включено|r.",
+        AUTO_ACCEPT_DISABLED = "Автопринятие заданий |cnRED_FONT_COLOR:отключено|r.",
+        AUTO_TURNIN_ENABLED = "Автосдача заданий |cnGREEN_FONT_COLOR:включена|r.",
+        AUTO_TURNIN_DISABLED = "Автосдача заданий |cnRED_FONT_COLOR:отключена|r.",
+
+        -- Main Addon
+        QUEST_ACCEPTED = "Задание автоматически принято.",
+        QUEST_TURNIN = "Задание автоматически сдано.",
+        QUEST_PROGRESS = "Вы выполнили |cnNORMAL_FONT_COLOR:%d|r из |cnNORMAL_FONT_COLOR:%d|r заданий на |cnNORMAL_FONT_COLOR:%s|r.",
+        WAYPOINT_SET = "Путевая точка установлена к месту сокровища.",
     }
 };
 
