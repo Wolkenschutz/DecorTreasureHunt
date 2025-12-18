@@ -65,7 +65,7 @@ local L = {
         -- Main Addon
         QUEST_ACCEPTED = "已自动接受任务。",
         QUEST_TURNIN = "已自动完成任务。",
-        QUEST_PROGRESS = "You have now completed |cnNORMAL_FONT_COLOR:%d|r of |cnNORMAL_FONT_COLOR:%d|r quests on |cnNORMAL_FONT_COLOR:%s|r.",
+        QUEST_PROGRESS = "目前你在 |cnNORMAL_FONT_COLOR:%d|r 已完成 |cnNORMAL_FONT_COLOR:%d|r 个任务中的 |cnNORMAL_FONT_COLOR:%s|r 个。",
         WAYPOINT_SET = "已设置通往宝藏位置的路径点。",
     }
 };
