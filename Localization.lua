@@ -48,7 +48,7 @@ local L = {
         -- Addon principal
         QUEST_ACCEPTED = "Misión aceptada automáticamente.",
         QUEST_TURNIN = "Misión entregada automáticamente.",
-        QUEST_PROGRESS = "You have now completed |cnNORMAL_FONT_COLOR:%d|r of |cnNORMAL_FONT_COLOR:%d|r quests on |cnNORMAL_FONT_COLOR:%s|r.",
+        QUEST_PROGRESS = "Has completado |cnNORMAL_FONT_COLOR:%d|r de |cnNORMAL_FONT_COLOR:%d|r misiones en |cnNORMAL_FONT_COLOR:%s|r.",
         WAYPOINT_SET = "Punto de ruta establecido en la ubicación del tesoro.",
     },
 
