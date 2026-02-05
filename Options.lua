@@ -77,43 +77,37 @@ AddonCompartmentFrame:RegisterAddon({
 local function RegisterSettings()
     EnsureDB();
 
-    if not Settings or not Settings.RegisterVerticalLayoutCategory then
-        return;
-    end
-
     local category = Settings.RegisterVerticalLayoutCategory(addonTitle);
 
     do
+        local defaultValue = true;
         local setting = Settings.RegisterAddOnSetting(
             category,
-            "DTH_AUTO_ACCEPT",
-            "autoAccept",
-            DecorTreasureHuntDB,
-            type(DecorTreasureHuntDB.autoAccept),
+            "autoAccept",            -- variable (SavedVariables key)
+            "DTH_AUTO_ACCEPT",       -- variableKey (unique setting key)
+            DecorTreasureHuntDB,     -- variableTbl (SavedVariables table)
+            type(defaultValue),
             L.AUTO_ACCEPT,
-            true
+            defaultValue
         );
 
-        Settings.CreateCheckbox(category, setting, L.AUTO_ACCEPT);
+        Settings.CreateCheckbox(category, setting, L.OPTIONS_DESCRIPTION);
     end
 
     do
+        local defaultValue = true;
         local setting = Settings.RegisterAddOnSetting(
             category,
-            "DTH_AUTO_TURNIN",
             "autoTurnIn",
+            "DTH_AUTO_TURNIN",
             DecorTreasureHuntDB,
-            type(DecorTreasureHuntDB.autoTurnIn),
+            type(defaultValue),
             L.AUTO_TURNIN,
-            true
+            defaultValue
         );
 
-        Settings.CreateCheckbox(category, setting, L.AUTO_TURNIN);
+        Settings.CreateCheckbox(category, setting, L.OPTIONS_DESCRIPTION);
     end
-
-    local initializer = Settings.CreateSettingInitializerData();
-    initializer.name = addonTitle;
-    initializer.tooltip = L.OPTIONS_DESCRIPTION;
 
     Settings.RegisterAddOnCategory(category);
 end
@@ -132,9 +126,7 @@ end);
 SLASH_DECORTREASUREHUNT1 = "/dth";
 SLASH_DECORTREASUREHUNT2 = "/decortreasurehunt";
 SlashCmdList["DECORTREASUREHUNT"] = function()
-    if Settings and Settings.OpenToCategory then
-        Settings.OpenToCategory(addonTitle);
-    end
+    Settings.OpenToCategory(addonTitle);
 end;
 
 -- Contributor: Earthenmist (PR: Blizzard Settings panel + localization)
