@@ -1,4 +1,4 @@
-## Interface: 120000
+## Interface: 120001
 ## Title: |cffe6c619Decor Treasure Hunt|r
 ## Notes: Automatically sets a waypoint for the daily Decor Treasure Hunt quest!
 ## Notes-deDE: Setzt automatisch einen Wegpunkt für die tägliche Quest Dekorationsjagd!
