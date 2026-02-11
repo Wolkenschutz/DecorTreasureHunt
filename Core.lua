@@ -67,6 +67,7 @@ local function OnEvent(self, event, questId)
             };
         end
 
+        DTH.RegisterSettings();
         return;
     end
 

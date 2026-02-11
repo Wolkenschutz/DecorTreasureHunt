@@ -5,27 +5,11 @@ local L = DTH.L;
 local addonTitle = C_AddOns.GetAddOnMetadata(ADDON_NAME, "Title");
 addonTitle = addonTitle:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "");
 
-local function EnsureDB()
-    if not DecorTreasureHuntDB then
-        DecorTreasureHuntDB = {};
-    end
-
-    if DecorTreasureHuntDB.autoAccept == nil then
-        DecorTreasureHuntDB.autoAccept = true;
-    end
-
-    if DecorTreasureHuntDB.autoTurnIn == nil then
-        DecorTreasureHuntDB.autoTurnIn = true;
-    end
-end
-
 -- ============================================================
 -- Addon Compartment Menu (Blizzard)
 -- ============================================================
 
 local function MenuGenerator(owner, rootDescription)
-    EnsureDB();
-
     rootDescription:CreateTitle(addonTitle);
 
     rootDescription:CreateCheckbox(
@@ -73,60 +57,56 @@ AddonCompartmentFrame:RegisterAddon({
 -- ============================================================
 -- Blizzard Settings (Modern)
 -- ============================================================
-
-local function RegisterSettings()
-    EnsureDB();
-
-    local category = Settings.RegisterVerticalLayoutCategory(addonTitle);
+local category;
+function DTH.RegisterSettings()
+    category = Settings.RegisterVerticalLayoutCategory(addonTitle);
 
     do
-        local defaultValue = true;
         local setting = Settings.RegisterAddOnSetting(
             category,
-            "autoAccept",            -- variable (SavedVariables key)
-            "DTH_AUTO_ACCEPT",       -- variableKey (unique setting key)
-            DecorTreasureHuntDB,     -- variableTbl (SavedVariables table)
-            type(defaultValue),
+            "DTH_AUTO_ACCEPT",
+            "autoAccept",
+            DecorTreasureHuntDB,
+            Settings.VarType.Boolean,
             L.AUTO_ACCEPT,
-            defaultValue
+            Settings.Default.True
         );
 
-        Settings.CreateCheckbox(category, setting, L.OPTIONS_DESCRIPTION);
+        setting:SetValueChangedCallback(function(_, value)
+            local message = value and L.AUTO_ACCEPT_ENABLED or L.AUTO_ACCEPT_DISABLED;
+            print("|cffe6c619" .. addonTitle .. ":|r " .. message);
+        end);
+
+        Settings.CreateCheckbox(category, setting);
     end
 
     do
-        local defaultValue = true;
         local setting = Settings.RegisterAddOnSetting(
             category,
-            "autoTurnIn",
             "DTH_AUTO_TURNIN",
+            "autoTurnIn",
             DecorTreasureHuntDB,
-            type(defaultValue),
+            Settings.VarType.Boolean,
             L.AUTO_TURNIN,
-            defaultValue
+            Settings.Default.True
         );
 
-        Settings.CreateCheckbox(category, setting, L.OPTIONS_DESCRIPTION);
+        setting:SetValueChangedCallback(function(_, value)
+            local message = value and L.AUTO_TURNIN_ENABLED or L.AUTO_TURNIN_DISABLED;
+            print("|cffe6c619" .. addonTitle .. ":|r " .. message);
+        end);
+
+        Settings.CreateCheckbox(category, setting);
     end
 
     Settings.RegisterAddOnCategory(category);
 end
 
-local settingsFrame = CreateFrame("Frame");
-settingsFrame:RegisterEvent("ADDON_LOADED");
-settingsFrame:SetScript("OnEvent", function(self, event, name)
-    if name ~= ADDON_NAME then
-        return;
-    end
-
-    RegisterSettings();
-end);
-
 -- Slash command (optional quick access)
 SLASH_DECORTREASUREHUNT1 = "/dth";
 SLASH_DECORTREASUREHUNT2 = "/decortreasurehunt";
-SlashCmdList["DECORTREASUREHUNT"] = function()
-    Settings.OpenToCategory(addonTitle);
+SlashCmdList.DECORTREASUREHUNT = function()
+    Settings.OpenToCategory(category.ID);
 end;
 
 -- Contributor: Earthenmist (PR: Blizzard Settings panel + localization)
